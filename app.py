@@ -183,15 +183,16 @@ def create_venue_submission():
 @app.route('/venues/<venue_id>', methods=['DELETE'])
 def delete_venue(venue_id):
     venue = Venue.query.get(venue_id)
-    try:
-        venue.delete()
-        db.session.commit()
-        flash(f'Venue {venue.name} has been successfully deleted')
-    except:
-        db.session.rollback()
-        flash(f'Venue {venue.name} failed to delete')
+    if request.method == "DELETE":
+        try:
+            venue.delete()
+            db.session.commit()
+            flash(f'Venue {venue.name} has been successfully deleted')
+        except:
+            db.session.rollback()
+            flash(f'Venue {venue.name} failed to delete')
 
-    return redirect(url_for("index"))
+        return redirect(url_for("index"))
     # BONUS CHALLENGE: Implement a button to delete a Venue on a Venue Page, have it so that
     # clicking that button delete it from the db then redirect the user to the homepage
 

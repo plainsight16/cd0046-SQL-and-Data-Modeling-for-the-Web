@@ -77,5 +77,17 @@
 
 <a href="/venues/{{ venue.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
 
+<button class="btn btn-primary btn-lg" id="deleteBtn">Delete</button>
+
+<script>
+	document.getElementById("deleteBtn").addEventListener("click", () =>{
+		console.log("click");
+		fetch("/venues/{{ venue.id }}/delete", {
+			method: "DELETE"
+		})
+	})
+</script>
+
 {% endblock %}
+
 
